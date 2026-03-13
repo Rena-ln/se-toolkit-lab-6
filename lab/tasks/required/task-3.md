@@ -91,6 +91,8 @@ Fix the failing question, re-run, move on to the next one.
 | Tool called but returns an error | Bug in tool implementation | Fix the tool code, test it in isolation |
 | Tool called with wrong arguments | LLM misunderstands the schema | Clarify parameter descriptions |
 | Agent times out | Too many tool calls or slow LLM | Reduce max iterations, try a faster model |
+| Agent crashes with `AttributeError: 'NoneType'` | LLM returns `content: null` when it makes tool calls | Use `(msg.get("content") or "")` instead of `msg.get("content", "")` — the field is present but `null`, not missing |
+| Agent reads the same file in a loop | File is too large and gets truncated, LLM can't find the answer | Increase the content limit sent back to the LLM |
 | Answer is close but doesn't match | Phrasing doesn't contain expected keyword | Adjust system prompt to be more precise |
 
 ## Deliverables

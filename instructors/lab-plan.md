@@ -227,9 +227,9 @@ Autochecker (Hetzner, clone_and_run for task 3):
 
 | Model | Context | Tool calling | Notes |
 |-------|---------|-------------|-------|
-| `meta-llama/llama-4-scout:free` | 512k | Strong | Best free option |
-| `meta-llama/llama-3.3-70b-instruct:free` | 128k | Strong | Reliable fallback |
-| `qwen/qwen-2.5-72b-instruct:free` | 128k | Good | Alternative |
+| `meta-llama/llama-3.3-70b-instruct:free` | 128k | Strong | Default in `.env.agent.example` |
+| `mistralai/mistral-small-3.1-24b-instruct:free` | 96k | Strong | Good alternative |
+| `qwen/qwen3-coder:free` | 128k | Good | Alternative |
 
 **Configuration:** `.env.agent.secret` (gitignored), with `.env.agent.example` committed.
 
@@ -578,7 +578,7 @@ This is a better model of real-world debugging (errors are often silent to the u
 - [x] Add `check_tools` / tool chain checking to engine.
 - [x] Add exception handler in `main.py` for visible error responses.
 - [x] Write Class E questions (3 LLM-judged reasoning, bot-only).
-- [x] Add `llm_judge` checking to engine (uses OpenRouter, llama-4-scout:free).
+- [x] Add `llm_judge` checking to engine (uses OpenRouter, gemini-2.5-flash-lite).
 - [x] Deploy autochecker with Class D/E questions and LLM judge.
 
 **Remaining:**

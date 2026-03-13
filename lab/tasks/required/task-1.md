@@ -40,9 +40,12 @@ Your agent needs an LLM that supports the OpenAI-compatible chat completions API
 
 | Model | Tool calling | Notes |
 |-------|-------------|-------|
-| `meta-llama/llama-4-scout:free` | Strong | Best free option |
-| `meta-llama/llama-3.3-70b-instruct:free` | Strong | Reliable fallback |
-| `qwen/qwen-2.5-72b-instruct:free` | Good | Alternative |
+| `meta-llama/llama-3.3-70b-instruct:free` | Strong | Default in `.env.agent.example` |
+| `mistralai/mistral-small-3.1-24b-instruct:free` | Strong | Good alternative |
+| `qwen/qwen3-coder:free` | Good | Alternative |
+
+> [!TIP]
+> Free models change frequently on OpenRouter. Check the [free models collection](https://openrouter.ai/collections/free-models) for the latest list. Filter for models that support **tool calling** — you will need this in Tasks 2–3.
 
 Register in OpenRouter and get an API key from them. This will be your LLM_API_KEY in `.env.agent.secret` (gitignored by the `*.secret` pattern). An example file is provided:
 
@@ -55,10 +58,11 @@ Edit `.env.agent.secret` and fill in `LLM_API_KEY`, `LLM_API_BASE`, and `LLM_MOD
 > **Note:** This is **not** the same as `LMS_API_KEY` in `.env.docker.secret`. That one protects your backend LMS endpoints. `LLM_API_KEY` authenticates with your LLM provider.
 
 > [!WARNING]
-> Free-tier models on OpenRouter have a **50 requests per day** limit per account. Plan your testing carefully:
-> - Use short, focused test runs instead of running the full eval repeatedly.
-> - Consider creating multiple OpenRouter accounts if you hit the limit.
-> - Implement retry logic with backoff for `429` errors (see [Optional Task 1](../optional/task-1.md#advanced-agent-features)).
+> **Rate limits on free models:**
+> - Free-tier models have a **50 requests per day** limit per account.
+> - Free models can also be **temporarily unavailable** due to upstream provider load. If you get a `429` error with a message about "temporarily rate-limited upstream", it means the model is overloaded — not that you hit your daily limit. Try again later or switch to a different free model.
+> - Plan your testing carefully: use `run_eval.py --index N` to test one question at a time instead of running the full eval repeatedly.
+> - Do not run `run_eval.py` until you have completed all three required tasks. Each run uses 10 requests.
 
 ## Deliverables
 

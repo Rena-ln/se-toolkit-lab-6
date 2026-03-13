@@ -114,7 +114,15 @@ We refer to your fork as `fork` and to the original repo as `upstream`.
 
    <h4>Port conflict (<code>port is already allocated</code>)</h4>
 
-   [Clean up `Docker`](../../wiki/docker.md#clean-up-docker), then run the `docker compose up` command again.
+   Labs 5 and 6 use the same ports (42001, 42002, 42004). If you have Lab 5 containers running, stop them first:
+
+   ```terminal
+   cd ../se-toolkit-lab-5
+   docker compose --env-file .env.docker.secret down
+   cd ../se-toolkit-lab-6
+   ```
+
+   If that doesn't help, [clean up `Docker`](../../wiki/docker.md#clean-up-docker), then run the `docker compose up` command again.
 
    <h4>Containers exit immediately</h4>
 
